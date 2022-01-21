@@ -11,14 +11,15 @@ void solve()
     int array[MAX] = {
         0,
     };
-    int dp[MAX] = {
-        0,
-    };
+    int dp[MAX];
+    for (int i = 0; i < MAX; i++)
+    {
+        dp[i] = 1;
+    }
     for (int i = 0; i < N; i++)
     {
         cin >> array[i];
     }
-    dp[0] = 1;
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < i; j++)
