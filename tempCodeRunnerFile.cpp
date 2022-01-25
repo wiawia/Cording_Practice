@@ -1,42 +1,30 @@
 #include <iostream>
-
+#include <vector>
+#include <math.h>
 using namespace std;
-#define MAX 1001
+#define MAX 201
 
 void solve()
 {
-    int N;
-    cin >> N;
+    int N, K;
+    cin >> N >> K;
+    long long dp[MAX][MAX];
 
-    int array[MAX] = {
-        0,
-    };
-    int dp[MAX] = {
-        0,
-    };
-    for (int i = 0; i < N; i++)
+    for (int i = 1; i <= N; i++)
     {
-        cin >> array[i];
+        dp[i][1] = i;
+        dp[1][i] = 1;
     }
-    dp[0] = 1;
-    for (int i = 0; i < N; i++)
+
+    for (int i = 2; i <= N; i++)
     {
-        for (int j = 0; j < i; j++)
+        for (int j = 2; j <= K; j++)
         {
-            if (array[j] < array[i] && dp[i] < dp[j] + 1)
-            {
-                dp[i] = dp[j] + 1;
-            }
+            dp[j][i] = (dp[j - 1][i] + dp[j][i - 1]) % 1000000000;
         }
     }
-    int ans = dp[0];
-    for (int i = 1; i < N; i++)
-    {
-        if (ans < dp[i])
-            ans = dp[i];
-    }
 
-    cout << ans;
+    cout << dp[K][N];
 }
 int main()
 {
